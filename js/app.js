@@ -31,8 +31,6 @@ var app = new Vue({
     stop() {
       this.isActive = false
     }
-
-
     
   }
 

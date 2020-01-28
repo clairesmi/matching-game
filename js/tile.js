@@ -43,9 +43,6 @@ Vue.component('tile', {
     clickHandler() {
       this.clicked = true
       console.log(event.target.id)
-      this.randomiseImages()
-      console.log(this.randomImages)
-      console.log(this.randomImageArray)
       this.$emit('tile-clicked', event.target.id)
     },
     randomiseImages() {
