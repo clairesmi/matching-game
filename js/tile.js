@@ -8,7 +8,7 @@ Vue.component('tile', {
               </div>
             </div>`,
 
-  props: ['name'],
+  // props: ['name'],
 
   data() {
     return {
@@ -43,7 +43,8 @@ Vue.component('tile', {
     clickHandler() {
       this.clicked = true
       console.log(event.target.id)
-      this.$emit('tile-clicked', event.target.id)
+      const randomImageArray = this.randomImageArray
+      this.$emit('tile-clicked', event.target.id, randomImageArray)
     },
     randomiseImages() {
       while (this.randomImageArray.length !== 4) {

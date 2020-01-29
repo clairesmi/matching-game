@@ -2,15 +2,23 @@ Vue.component('guess', {
 
   template:
 
-              `<div class="button-wrapper" @click="clickHandler">
+              `<div class="button-wrapper">
               <div class="button-div" v-for="elem in randomBrandArray">
-                <button class="brand-button" :id=elem.brand>{{elem.brand}}</button>
+                <button class="brand-button" :id=elem.brand @click="clickHandler">{{elem.brand}}</button>
                 </div>
               </div>`,
 
-  props: ['name'],
+  props: {
+    disableButton: Boolean,
+    watch: {
+      'disableButton'() {
+        this.$emit('update:disableButton', this.disableButton)
+      }
+    }
+  },
 
   data() {
+    console.log(this.disableButton)
     return {
       exampleData: [
         { 'image': 'https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto,fl_lossy/6a48858b62374aed8449a8af011d27ba_9366/Lite_Racer_CLN_Shoes_Blue_B96566_01_standard.jpg',
@@ -28,14 +36,17 @@ Vue.component('guess', {
   },
 
   mounted () {
+    // console.log(this.exampleData)
     this.randomiseBrands()
+    console.log(this.exampleData)
+    // this.$emit('check-match', randomBrandArray)
   },
   
   methods: {
     clickHandler() {
       this.clicked = true
-      console.log(event.target.id)
       this.$emit('guess-clicked', event.target.id)
+      console.log(this.disableButton)
     },
     randomiseBrands() {
       while (this.randomBrandArray.length !== 4) {
@@ -43,7 +54,7 @@ Vue.component('guess', {
         !this.randomBrandArray.includes(randomBrand) ? this.randomBrandArray.push(randomBrand) : this.randomiseBrands()
         console.log(this.randomBrandArray)
       }
-      return this.randomImageArray
+      return this.randomBrandArray
     }
   }
 
