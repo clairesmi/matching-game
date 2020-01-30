@@ -1,13 +1,12 @@
 Vue.component('tile', {
 
   template: `<div>
-              <div class="button-wrapper">
-              <div class="button-div" v-for="elem in randomImageArray">
-                <button class="image-button" :id=elem.name @click="clickHandler">
-                <img :id=elem.name :src=elem.image /></button>
-                </div>
-              </div>
-            </div>`,
+  <div class="button-wrapper">
+  <div class="button-div" v-for="elem in randomImageArray">
+    <button class="image-button" :id=elem.name @click="clickHandler"><img :id=elem.name :src=elem.image></button>
+    </div>
+  </div>
+</div>`,
 
   data() {
     return {
@@ -47,7 +46,6 @@ Vue.component('tile', {
       while (this.randomImageArray.length !== 4) {
         const randomImage = this.exampleData[Math.floor(Math.random() * this.exampleData.length)]
         !this.randomImageArray.includes(randomImage) ? this.randomImageArray.push(randomImage) : this.randomiseImages()
-        console.log(this.randomImageArray)
       }
       return this.randomImageArray
     }

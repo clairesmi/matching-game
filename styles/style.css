@@ -1,21 +1,34 @@
 * {
   box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
 }
 
 body {
   margin: 0;
-  font-family: 'Courier New'
+  font-family: 'Courier New';
 }
 
 #app {
-  margin: 0 auto;
+  margin: 0;
   width: 100%;
   font-size: 24px;
+  
 }
 
 #app > * {
-  margin: 0 auto;
+  margin: 0;
   text-align: center;
+}
+
+.counter {
+  padding: 20px;
+}
+
+.game-wrapper {
+  height: 100vh;
+  background: url('https://lh6.googleusercontent.com/proxy/M4IGaaQq3-EDMTuH7fETYze3lK_KAIjjfk8OLaGfV3TZ3TORwT2z7RIhfSDkzYGQVJ5qT6Arz1DjDLwrZ7UBBYzrY4zLAboLfMAY22dEc2h37U_PDkVOkwE8vg');
+  background-size: cover;
 }
 
 h1 {
@@ -32,15 +45,15 @@ h1 {
   margin: 10px;
 }
 
-.brand-button {
+.name-button {
   display: flex;
   flex-direction: column;
+  width: 200px;
   border-radius: 25px;
   padding: 9px 16px;
   font-size: 20px;
   cursor: pointer;
-  margin: 0 auto;
-  margin-bottom: 50px;
+
 }
 
 .image-button {
@@ -50,7 +63,7 @@ h1 {
   padding: 9px 16px;
   font-size: 20px;
   cursor: pointer;
-  margin: 0 auto;
+  margin: 20px;
   margin-bottom: 50px;
 }
 
@@ -59,33 +72,68 @@ img {
   height: 100px;
 }
 
-button.start {
-  background: green;
-}
 
-button.stop {
-  background: red;
-}
-
-.game {
-  width: 80vw;
-  height: 400px;
-  background: grey;
+.start-screen {
+  background: url('https://lh6.googleusercontent.com/proxy/M4IGaaQq3-EDMTuH7fETYze3lK_KAIjjfk8OLaGfV3TZ3TORwT2z7RIhfSDkzYGQVJ5qT6Arz1DjDLwrZ7UBBYzrY4zLAboLfMAY22dEc2h37U_PDkVOkwE8vg');
+  background-size: cover;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center
+  align-items: center;
+  padding: 50px;
+  font-size: 80px;
+  height: 100vh;
+  width: 100vw;
+}
+
+.start-screen > h1 {
+  font-size: 60px;
+  color: #232b2b;
+}
+
+.start-screen > button {
+  background-color: aliceblue;
+  height: 100px;
+  width: 400px;
+  font-size: 40px;
+  font-family: 'Courier New';
+  cursor: pointer;
+  margin: 100px 0px;
+  border-radius: 25px;
+}
+
+.game {
+  width: 100vw;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0px;
 }
 
 .game > div {
   width: 20%;
   height: 30%;
-  background: #3492fb;
   border-radius: 25px;
   cursor: pointer;
-  margin: 10px
 }
+
+.image-button {
+  margin-bottom: 30px;
+}
+
+.name-button {
+  margin-top: 100px;
+  width: 180px;
+}
+
+.button-div {
+  height: 300px;
+  width: 300px;
+}
+
 
 .guesses > div {
   width: 20%;
