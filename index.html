@@ -10,11 +10,14 @@
 
   <body>
     <div id="app">
-
+      <div class="start-screen" v-if="!gameEnd, !isActive">
+        <button class="start" @click="start">Play Game</button>
+      </div>
+      <div class="game-wrapper" v-if="!gameEnd, isActive">
       <div class="controls">
-        <button class="start" v-if="!isActive" @click="start">Start</button>
-        <button class="stop" v-if="isActive" @click="stop">Stop</button>
+        
         <div class="counter" v-if="isActive">{{ seconds }}</div>
+        <div class="counter" v-if="isActive">{{ score }} Matched!</div>
       </div>
 
       <div class="game">
@@ -22,11 +25,11 @@
         <guess @guess-clicked="handleGuessClick"></guess>
       </div>
 
-      <div class="feedback">
-        <span>{{ tilesClicked }}</span>
-      </div>
     </div>
-
+        <div v-if="gameEnd" class="end-game-modal">
+          <div>Congratulations! You matched all the positions!</div>
+        </div>
+    </div>
 
     <script src="js/tile.js"></script>
     <script src="js/guess.js"></script>

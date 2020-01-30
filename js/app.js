@@ -1,5 +1,6 @@
 var app = new Vue({
   el: '#app',
+
   data() {
     return {
       isActive: false,
@@ -8,22 +9,36 @@ var app = new Vue({
       tilesClicked: [],
       guessClicked: [],
       matchCounter: 0,
-      modalActive: false,
-      disableImage: false, 
-      disableButton: false,
+      modalActive: true,
       userImageGuess: '',
-      userNameGuess: ''
+      userNameGuess: '',
+      score: 0,
+      gameEnd: false,
+      scoreArray: localStorage.getItem('points') ? JSON.parse(localStorage.getItem('points')) : [],
+      scoreData: localStorage.getItem('points') ? JSON.parse(localStorage.getItem('points')) : [],
+      name: ''
+
     }
   },
 
   methods: {
     start() {
       this.isActive = true
+      this.modalActive = false
+      this.gameEnd = false
+      this.score = 0
+      this.seconds = 0
+      this.matchCounter = 0
+      console.log(this.modalActive, 'no modal')
       this.startTimer()
     },
     startTimer() {
       const timer = setInterval(() => {
         this.seconds += 1
+        if (this.gameEnd) {
+          this.stop()
+          clearInterval(timer)
+        }
       }, 1000)
     },
     
@@ -44,35 +59,50 @@ var app = new Vue({
     },
 
     checkMatch() {
-      // console.log(randomImageArray)
-      console.log(this.userImageGuess, this.userNameGuess, 'hi')
-      if (this.userImageGuess === this.userNameGuess) {
+      if (this.userImageGuess && this.userNameGuess && this.userImageGuess === this.userNameGuess) {
         this.matchCounter += 1
-        // this.userImageGuess && this.disableImage = true
-        // this.disableButton = true
-        // this.newImageArray.remove(this.userImageGuess)
-        this.newImageArray.splice(this.newImageArray.indexOf(this.userImageGuess), 1)
-        // console.log(this.matchCounter, this.disableButton, this.disableImage) 
-      }
+        this.score += 1
+        this.userImageGuess = ''
+        this.userNameGuess = ''
 
-      if (this.userImageGuess === event.target.id) {
-        this.disableImage = true
       }
       if (this.matchCounter === 4) {
+        this.stop()
         this.endOfGame()
       }
     },
-
+    
+    stop() {
+      this.isActive = false
+      this.gameEnd = true
+    },
+    
     endOfGame() {
       console.log('END SCREEN NOW')
       this.modalActive = !this.modalActive
       console.log('modal', this.modalActive)
+    }
+
+    
+  },
+
+  computed: {
+
+    handleInput() {
+      this.name = this.value
+      console.log(this.name)
     },
 
-    stop() {
-      this.isActive = false
+    submitScore() {
+      this.scoreArray = [...this.scoreArray, { 'name': this.name, 'seconds': this.seconds }]
+        .sort((a, b) => b.score - a.score).slice(0, 5)
+      console.log(this.scoreArray)
+      localStorage.setItem('points', JSON.stringify(this.scoreArray))
+      this.name = ''
+      const input = document.querySelector('.input')
+      input.value = ''
+
     }
-    
   }
 
 })

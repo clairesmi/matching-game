@@ -96,6 +96,13 @@ button.stop {
   margin: 10px
 }
 
+.end-game-modal {
+  z-index: 1;
+  border: solid black 2px;
+  height: 500px;
+  width: 500px;
+}
+
 #instructions h1 {
   text-align: center;
 }
